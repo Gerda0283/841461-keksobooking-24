@@ -7,60 +7,62 @@ const getAvatar = function(min, max) {
   min = Math.ceil(Math.abs(imageNumber[0]));
   max = Math.floor(Math.abs(imageNumber.length + 1));
 
-  if (min <= 9) {
+  if (min < 9) {
 
-    return 'img/avatars/user' + '0' + (Math.floor(Math.random() * (max - min + 1)) + min) + '.png';
+    return `img/avatars/user${0}${Math.floor(Math.random() * (max - min + 1)) + min}.png`;
 
   } else {
 
-    return 'img/avatars/user' + (Math.floor(Math.random() * (max - min + 1)) + min) + '.png';
+    return `img/avatars/user${Math.floor(Math.random() * (max - min + 1)) + min}.png`;
   }
 };
 
 const authorImage = getAvatar();
 
-const author = {
-  avatar: authorImage
+
+// Название помещения.строка
+
+const titleList = ['Фудзи', 'Саккура', 'Утреннее солнце', 'Горы в тумане', 'Морской бриз', 'Бирюза', 'Вишнёвый сад', 'Хижина у моря', 'Летний дом', 'Зимний дом'];
+
+const getTitle = function(min, max) {
+
+  min = Math.ceil(Math.abs(min));
+  max = Math.floor(Math.abs(max));
+
+  return (Math.floor(Math.random() * (max - min + 1)) + min);
 };
+
+const title = titleList[getTitle(0, (titleList.length - 1))];
 
 
 // Адрес и местоположение.строка(значения с плавающей точкой)
 
-const minLat = 35.65000;
-const maxLat = 35.70000;
-const minLng = 139.70000;
-const maxLng = 139.80000;
+const getLat =(latMin, latMax, digits = 4) => {
 
-const getLat =(minLat, maxLat, digits = 4) => {
-
-  const lower = Math.min(Math.abs(minLat), Math.abs(maxLat));
-  const upper = Math.max(Math.abs(minLat), Math.abs(maxLat));
+  const lower = Math.min(Math.abs(latMin), Math.abs(latMax));
+  const upper = Math.max(Math.abs(latMin), Math.abs(latMax));
 
   const locationLat = Math.random() * (upper - lower) + lower;
 
   return locationLat.toFixed(digits);
 };
 
-const latitude = getLat(minLat, maxLat);
+const latitude = getLat(35.65000, 35.70000);
 
-const getLng =(minLng, maxLng, digits = 4) => {
 
-  const lower = Math.min(Math.abs(minLng), Math.abs(maxLng));
-  const upper = Math.max(Math.abs(minLng), Math.abs(maxLng));
+const getLng =(lngmin, lngMax, digits = 4) => {
+
+  const lower = Math.min(Math.abs(lngmin), Math.abs(lngMax));
+  const upper = Math.max(Math.abs(lngmin), Math.abs(lngMax));
 
   const locationLng = Math.random() * (upper - lower) + lower;
 
   return locationLng.toFixed(digits);
 };
 
-const longitude = getLng(minLng, maxLng);
+const longitude = getLng(139.70000, 139.80000);
 
-const location = {
-  lat: latitude,
-  lng: longitude
-};
-
-const address = location.lat + ',' + location.lng;
+const address = `${latitude}, ${longitude}`;
 
 
 // Цена.число
@@ -131,7 +133,7 @@ const checkout = hours[getCheck(0, (hours.length - 1))];
 
 const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-function getFeature(featuresList) {
+function getFeature() {
   const maxLength = featuresList.length;
   const lengthOfArray = getRandomNumber(1, maxLength);
   const array = [];
@@ -153,6 +155,20 @@ function getFeature(featuresList) {
 
 const features = getFeature(featuresList);
 
+// Описание помещения.строка
+
+const descriptionList = ['С видом на Фудзи', 'Дом окружён парком', 'Большую часть дня в квартире естественный свет', 'для тех, кто любит высоту', 'С видом на океан', 'Все оттенки голубого прекрасно охладят в жару', 'Вишнёвый цвет в Ваших окнах', 'Пляжный домик', 'одноэтажное бунгало для друзей', 'тут вы сможете в комфорте пережить холодное время года'];
+
+const getDescription = function(min, max) {
+
+  min = Math.ceil(Math.abs(min));
+  max = Math.floor(Math.abs(max));
+
+  return (Math.floor(Math.random() * (max - min + 1)) + min);
+};
+
+const description = descriptionList[getDescription(0, (descriptionList.length - 1))];
+
 
 // Фотографии помещения.массив строк случайной длины
 
@@ -162,7 +178,7 @@ const images = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-function getPhoto(images) {
+function getPhoto() {
   const maxLength = images.length;
   const lengthOfArray = getRandomNumber(1, maxLength);
   const array = [];
@@ -187,35 +203,37 @@ const photos = getPhoto(images);
 
 //Сборка
 
-console.log(author);
+const createAnnouncement = () => {
+  const author = {
+    avatar: authorImage
+  };
 
-// Название.строка
+  const offer = {
+    title: title,
+    address: address,
+    price: getPrice(200,1200),
+    type: type,
+    rooms: getRoom(1,5),
+    guests: getGuests(1,10),
+    checkin: checkin,
+    checkout: checkout,
+    features: features,
+    description: description,
+    photos: photos
+  };
 
-const title = 'Название';
+  const location = {
+    lat: latitude,
+    lng: longitude
+  };
 
-// Описание помещения.строка
-
-const description = 'Описание помещения';
-
-const price = getPrice();
-const rooms = getRoom();
-const guests = getGuests();
-
-//объект недвижимости .объект с полями, просчитанными выше
-
-const offer = {
-  title: title,
-  address: address,
-  price: price,
-  type: type,
-  rooms: rooms,
-  guests: guests,
-  checkin: checkin,
-  checkout: checkout,
-  features: features,
-  description: description,
-  photos: photos
+  return {
+    author,
+    offer,
+    location
+  };
 };
 
-console.log(offer);
-console.log(location);
+const announcement = createAnnouncement();
+const announcementItems = 10;
+
