@@ -1,23 +1,24 @@
+const getRandomNumber = function(min, max) {
+  min = Math.ceil(Math.abs(min));
+  max = Math.floor(Math.abs(max));
+  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+};
+getRandomNumber();
+
+
 // Автор ( объект.одно поле)
 
 const imageNumber = [ 1,2,3,4,5,6,7,8,9,10 ];
 
 const getAvatar = function(min, max) {
-
+  const randomNumber = getRandomNumber(min, max);
   min = Math.ceil(Math.abs(imageNumber[0]));
-  max = Math.floor(Math.abs(imageNumber.length + 1));
+  max = Math.floor(Math.abs(imageNumber.length));
+  Math.floor(Math.random() * (max - min + 1)) + min;
+  const avatarNumber = randomNumber <= imageNumber.length-1 ? '0'+randomNumber : randomNumber;
 
-  if (min < 9) {
-
-    return `img/avatars/user${0}${Math.floor(Math.random() * (max - min + 1)) + min}.png`;
-
-  } else {
-
-    return `img/avatars/user${Math.floor(Math.random() * (max - min + 1)) + min}.png`;
-  }
+  return `img/avatars/user${avatarNumber}.png`;
 };
-
-const authorImage = getAvatar();
 
 
 // Название помещения.строка
@@ -147,27 +148,19 @@ function getFeature() {
     }
   }
   return array;
-
-  function getRandomNumber(from, to) {
-    return Math.floor(Math.random() * (to - from + 1)) + from;
-  }
 }
 
-const features = getFeature(featuresList);
 
 // Описание помещения.строка
 
 const descriptionList = ['С видом на Фудзи', 'Дом окружён парком', 'Большую часть дня в квартире естественный свет', 'для тех, кто любит высоту', 'С видом на океан', 'Все оттенки голубого прекрасно охладят в жару', 'Вишнёвый цвет в Ваших окнах', 'Пляжный домик', 'одноэтажное бунгало для друзей', 'тут вы сможете в комфорте пережить холодное время года'];
 
-const getDescription = function(min, max) {
+const getDescription = function() {
 
-  min = Math.ceil(Math.abs(min));
-  max = Math.floor(Math.abs(max));
+  const randomDescriptionItemIndex = getRandomNumber(0, descriptionList.length - 1);
 
-  return (Math.floor(Math.random() * (max - min + 1)) + min);
+  return descriptionList[randomDescriptionItemIndex];
 };
-
-const description = descriptionList[getDescription(0, (descriptionList.length - 1))];
 
 
 // Фотографии помещения.массив строк случайной длины
@@ -192,39 +185,33 @@ function getPhoto() {
     }
   }
   return array;
-
-  function getRandomNumber(from, to) {
-    return Math.floor(Math.random() * (to - from + 1)) + from;
-  }
 }
-
-const photos = getPhoto(images);
 
 
 //Сборка
 
 const createAnnouncement = () => {
   const author = {
-    avatar: authorImage
+    avatar: getAvatar()
   };
 
   const offer = {
-    title: title,
-    address: address,
-    price: getPrice(200,1200),
-    type: type,
-    rooms: getRoom(1,5),
-    guests: getGuests(1,10),
-    checkin: checkin,
-    checkout: checkout,
-    features: features,
-    description: description,
-    photos: photos
+    title: titleList[getTitle(0, (titleList.length - 1))],
+    address: `${getLat()}, ${getLng()}`,
+    price: getPrice(),
+    type: types[getType(0, (types.length - 1))],
+    rooms: getRoom(),
+    guests: getGuests(),
+    checkin: hours[getCheck(0, (hours.length - 1))],
+    checkout: hours[getCheck(0, (hours.length - 1))],
+    features: getFeature(),
+    description: getDescription(),
+    photos: getPhoto()
   };
 
   const location = {
-    lat: latitude,
-    lng: longitude
+    lat: getLat(35.65000, 35.70000),
+    lng: getLng(139.70000, 139.80000)
   };
 
   return {
@@ -237,3 +224,4 @@ const createAnnouncement = () => {
 const announcement = createAnnouncement();
 const announcementItems = 10;
 
+const similarAnnouncements = Array.from({length:announcementItems}, createAnnouncement);
