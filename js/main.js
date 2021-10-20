@@ -3,7 +3,6 @@ const getRandomNumber = function(min, max) {
   max = Math.floor(Math.abs(max));
   return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
 };
-getRandomNumber();
 
 
 // Автор ( объект.одно поле)
@@ -12,10 +11,7 @@ const imageNumber = [ 1,2,3,4,5,6,7,8,9,10 ];
 
 const getAvatar = function(min, max) {
   const randomNumber = getRandomNumber(min, max);
-  min = Math.ceil(Math.abs(imageNumber[0]));
-  max = Math.floor(Math.abs(imageNumber.length));
-  Math.floor(Math.random() * (max - min + 1)) + min;
-  const avatarNumber = randomNumber <= imageNumber.length-1 ? '0'+randomNumber : randomNumber;
+  const avatarNumber = randomNumber <= 9 ? '0'+randomNumber : randomNumber;
 
   return `img/avatars/user${avatarNumber}.png`;
 };
@@ -27,13 +23,11 @@ const titleList = ['Фудзи', 'Саккура', 'Утреннее солнц�
 
 const getTitle = function(min, max) {
 
-  min = Math.ceil(Math.abs(min));
-  max = Math.floor(Math.abs(max));
+  const randomNumber = getRandomNumber(min, max);
+  const title = randomNumber;
 
-  return (Math.floor(Math.random() * (max - min + 1)) + min);
+  return title;
 };
-
-const title = titleList[getTitle(0, (titleList.length - 1))];
 
 
 // Адрес и местоположение.строка(значения с плавающей точкой)
@@ -63,8 +57,6 @@ const getLng =(lngmin, lngMax, digits = 4) => {
 
 const longitude = getLng(139.70000, 139.80000);
 
-const address = `${latitude}, ${longitude}`;
-
 
 // Цена.число
 
@@ -83,13 +75,11 @@ const types = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
 const getType = function(min, max) {
 
-  min = Math.ceil(Math.abs(min));
-  max = Math.floor(Math.abs(max));
+  const randomNumber = getRandomNumber(min, max);
+  const type = randomNumber;
 
-  return (Math.floor(Math.random() * (max - min + 1)) + min);
+  return type;
 };
-
-const type = types[getType(0, (types.length - 1))];
 
 
 // Количество комнат.случайное число
@@ -125,9 +115,6 @@ const getCheck = function(min, max) {
 
   return (Math.floor(Math.random() * (max - min + 1)) + min);
 };
-
-const checkin = hours[getCheck(0, (hours.length - 1))];
-const checkout = hours[getCheck(0, (hours.length - 1))];
 
 
 // Характеристики.массив строк случайной длины
