@@ -179,21 +179,21 @@ function getPhoto() {
 
 const createAnnouncement = () => {
   const author = {
-    avatar: getAvatar()
+    avatar: getAvatar(0, 9)
   };
 
   const offer = {
     title: titleList[getTitle(0, (titleList.length - 1))],
-    address: `${getLat()}, ${getLng()}`,
-    price: getPrice(),
+    address: `${getLat(35,65, 35.70)}, ${getLng(139.70, 139.80)}`,
+    price: getPrice(200, 1000),
     type: types[getType(0, (types.length - 1))],
-    rooms: getRoom(),
-    guests: getGuests(),
+    rooms: getRoom(1, 10),
+    guests: getGuests(1, 15),
     checkin: hours[getCheck(0, (hours.length - 1))],
     checkout: hours[getCheck(0, (hours.length - 1))],
-    features: getFeature(),
-    description: getDescription(),
-    photos: getPhoto()
+    features: getFeature(0, 5),
+    description: getDescription(0, 9),
+    photos: getPhoto(0, 2)
   };
 
   const location = {
