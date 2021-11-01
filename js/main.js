@@ -1,3 +1,4 @@
-import './util.js';
-import './data.js';
-import './form.js';
+import {similarAnnouncements} from './data';
+import {createPopup} from './popup';
+
+createPopup(similarAnnouncements[0]);
