@@ -1,9 +1,7 @@
 import {similarAnnouncements} from './data.js';
 
 const popupList = similarAnnouncements;
-
 const userDialog = document.querySelector('.map__canvas');
-
 const templateFragment = document.querySelector('#card').content; // Находим фрагмент с содержимым темплейта
 const popupContainer = templateFragment.querySelector('.popup'); // В существующем фрагменте находим содержимое
 
@@ -13,10 +11,9 @@ popupList.forEach(({offer}) => {
   popup.querySelector('.popup__title').textContent = offer.title;
   popup.querySelector('.popup__text--address').textContent = offer.address;
 
-  popup.querySelector('.popup__text--price').textContent = offer.price;
   const priceContainer = document.createElement('p');
   priceContainer.innerHTML = '<span>₽/ночь</span>';
-  offer.price.append(priceContainer);
+  popup.querySelector('.popup__text--price').textContent = offer.price + priceContainer.innerHTML;
 
   const type = popup.querySelector('popup__type').value;
   const typeContainer = document.createElement('h4');
