@@ -1,4 +1,4 @@
-import {getRandomNumber} from './util';
+import {getRandomNumber} from './util.js';
 
 //Константы
 

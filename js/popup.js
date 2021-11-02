@@ -1,4 +1,4 @@
-import {similarAnnouncements} from './data';
+import {similarAnnouncements} from './data.js';
 
 const popupList = similarAnnouncements;
 const userDialog = document.querySelector('.map__canvas');
@@ -10,20 +10,24 @@ const popupFragment = document.createDocumentFragment();
 const createPopup = function(popupList) {
   const popup = popupContainer.cloneNode(true); // клонировала фрагмент шаблона тут
 
-  const newAvatar = function(author) {
+ /* const newAvatar = function(author) {
     popup.querySelector('.popup__avatar').content = author.avatar;
     author.setAttribute('src', 'author.avatar');
   };
-  newAvatar();
+  newAvatar();*/
 
-  const getPopupPhotos = function(offer, photoContainer) {
-    offer.photos.forEach((userPhoto) => {
+  popup.querySelector('.popup__avatar').src = popupList.author.avatar;
+
+  const photoContainer = popup.querySelector('.popup__photos');
+
+  const getPopupPhotos = function() {
+    popupList.offer.photos.forEach((userPhoto) => {
       const photoElement = document.createElement('img');
       photoElement.classList.add('popup__photo');
       photoElement.width = 45;
       photoElement.height = 40;
       photoElement.alt = 'Фотография жилья';
-      photoContainer.querySelector('.popup__photos').appendChild(photoElement);
+      photoContainer.appendChild(photoElement);
     });
   };
   getPopupPhotos();
@@ -39,9 +43,8 @@ const createPopup = function(popupList) {
   const featuresContainer = popup.querySelector('.popup__features');
   featuresContainer.innerHTML = '';
   features.forEach((feature) => {
-    const featureListItem = popup.createElement('li');
-    featureListItem.classList.add('popup__feature');
-    featureListItem.classList.add('popup__feature --' + feature);
+    const featureListItem = document.createElement('li');
+    featureListItem.classList.add(('popup__feature --') + feature);
     featureListItem.textContent = features[feature];
     featuresContainer.append(featureListItem);
   });

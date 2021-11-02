@@ -1,4 +1,4 @@
-import {similarAnnouncements} from './data';
-import {createPopup} from './popup';
+import {similarAnnouncements} from './data.js';
+import {createPopup} from './popup.js';
 
 createPopup(similarAnnouncements[0]);
