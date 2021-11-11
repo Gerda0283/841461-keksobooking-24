@@ -1,7 +1,4 @@
-import {
-  getRandomNumber
-}
-  from './util.js';
+import {getRandomNumber} from './util.js';
 
 //Константы
 
@@ -29,7 +26,7 @@ const ANNOUNCEMENTITEMS = 10;
 
 const getAvatar = function(min, max) {
   const randomNumber = getRandomNumber(min, max);
-  const avatarNumber = randomNumber <= 9 ? '0' + randomNumber : randomNumber;
+  const avatarNumber = randomNumber <= 9 ? `0${randomNumber}` : randomNumber;
 
   return `img/avatars/user${avatarNumber}.png`;
 };
@@ -166,12 +163,12 @@ function getPhoto() {
 
 const createAnnouncement = () => {
   const author = {
-    avatar: getAvatar(0, 9)
+    avatar: getAvatar(1, 9)
   };
 
   const offer = {
     title: TITLELIST[getTitle(0, (TITLELIST.length - 1))],
-    address: `${getLat(35,65, 35.70)}, ${getLng(139.70, 139.80)}`,
+    address: `${getLat(35.65, 35.70)}, ${getLng(139.70, 139.80)}`,
     price: getPrice(200, 1000),
     type: TYPES[getType(0, (TYPES.length - 1))],
     rooms: getRoom(1, 10),
@@ -180,7 +177,7 @@ const createAnnouncement = () => {
     checkout: HOURS[getCheck(0, (HOURS.length - 1))],
     features: getFeature(0, 5),
     description: getDescription(0, 9),
-    photos: getPhoto(0, 2)
+    photos: getPhoto(1, 3)
   };
 
   const location = {
