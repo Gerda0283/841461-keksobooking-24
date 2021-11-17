@@ -41,9 +41,10 @@ const setActiveMode = () => {
   userFiltersForm.disabled = false;
   userFiltersForm.classList.remove('map__filters--disabled');
 };
+setActiveMode();
 
-userForm.addEventListener('DOMContentLoaded', setDisabledMode);
-userForm.addEventListener('load', setActiveMode);
+//userForm.addEventListener('DOMContentLoaded', setDisabledMode);
+//userForm.addEventListener('load', setActiveMode);
 
 
 userTitleInput.addEventListener('input', () => {
