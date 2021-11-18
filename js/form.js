@@ -32,6 +32,8 @@ const setDisabledMode = () => {
   userFiltersForm.classList.add('map__filters--disabled');
 };
 
+setDisabledMode();
+
 const setActiveMode = () => {
   userForm.classList.remove('shownad-form--disabled');
   for (const userFieldset of userFieldsets) {
@@ -41,10 +43,10 @@ const setActiveMode = () => {
   userFiltersForm.disabled = false;
   userFiltersForm.classList.remove('map__filters--disabled');
 };
+
 setActiveMode();
 
-//userForm.addEventListener('DOMContentLoaded', setDisabledMode);
-//userForm.addEventListener('load', setActiveMode);
+window.addEventListener('DOMContentLoaded');
 
 
 userTitleInput.addEventListener('input', () => {
