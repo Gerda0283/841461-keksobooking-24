@@ -43,8 +43,7 @@ const setActiveMode = () => {
 };
 setActiveMode();
 
-//userForm.addEventListener('DOMContentLoaded', setDisabledMode);
-//userForm.addEventListener('load', setActiveMode);
+userForm.addEventListener('DOMContentLoaded', setDisabledMode);
 
 
 userTitleInput.addEventListener('input', () => {
