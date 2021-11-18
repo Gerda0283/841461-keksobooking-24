@@ -8,12 +8,12 @@ const MIN_PRICE_BY_TYPE = {
   palace: 10000
 };
 const MAX_PRICE = 1000000;
-
 const MAX_NUMBER_OF_ROOMS = 100;
 const MIN_CAPACITY = 0;
 
+const userFiltersForm = document.querySelector('.map__filters');
 const userForm = document.querySelector('.ad-form');
-//const userFieldsets = userForm.querySelector('.ad-form__element');
+const userFieldsets = userForm.querySelector('.ad-form__element');
 const userTitleInput = userForm.querySelector('[name="title"]');
 const userPriceInput = userForm.querySelector('[name="price"]');
 const userTypeInput = userForm.querySelector('[name="type"]');
@@ -21,6 +21,30 @@ const userRoomInput = userForm.querySelector('[name="rooms"]');
 const userGuestInput = userForm.querySelector('[name="capacity"]');
 const userTimeIn = userForm.querySelector('[name="timein"]');
 const userTimeOut = userForm.querySelector('[name="timeout"]');
+
+const setDisabledMode = () => {
+  userForm.classList.add('shownad-form--disabled');
+  for (const userFieldset of userFieldsets) {
+    userFieldset.disabled = true;
+    userFieldset.classList.add('disabled');
+  }
+  userFiltersForm.disabled = true;
+  userFiltersForm.classList.add('map__filters--disabled');
+};
+
+const setActiveMode = () => {
+  userForm.classList.remove('shownad-form--disabled');
+  for (const userFieldset of userFieldsets) {
+    userFieldset.disabled = false;
+    userFieldset.classList.remove('disabled');
+  }
+  userFiltersForm.disabled = false;
+  userFiltersForm.classList.remove('map__filters--disabled');
+};
+setActiveMode();
+
+//userForm.addEventListener('DOMContentLoaded', setDisabledMode);
+//userForm.addEventListener('load', setActiveMode);
 
 
 userTitleInput.addEventListener('input', () => {
