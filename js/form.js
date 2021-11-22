@@ -13,7 +13,7 @@ const MIN_CAPACITY = 0;
 
 const userFiltersForm = document.querySelector('.map__filters');
 const userForm = document.querySelector('.ad-form');
-const userFieldsets = userForm.querySelector('.ad-form__element');
+const userFieldsets = userForm.querySelectorAll('.ad-form__element');
 const userTitleInput = userForm.querySelector('[name="title"]');
 const userPriceInput = userForm.querySelector('[name="price"]');
 const userTypeInput = userForm.querySelector('[name="type"]');
